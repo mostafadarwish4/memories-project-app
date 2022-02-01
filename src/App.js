@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState,useEffect } from 'react';
+import {useDispatch} from 'react-redux'
+import {Container,Grid,Grow} from '@mui/material';
+import Posts from './components/posts/posts';
+import Header from './components/Header/header';
+import Form from './components/form/form';
+import {getPosts} from './store/actions/posts';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App=()=>{
+    const [currentId,setCurrentId]=useState(0);
+    const dispatch=useDispatch()
+
+    useEffect(()=>{
+        dispatch(getPosts())
+    },[dispatch])
+    return(
+        
+            <Container maxWidth="lg">
+                <Header/>
+                <Grow in>
+                    <Container >
+                        <Grid  container justify="space-between" alignItems="stretch" spacing={8}  >
+                            <Grid item xs={12} sm={4} position="relative" >
+                                <Form currentId={currentId} setCurrentId={setCurrentId} />
+                            </Grid>
+                            <Grid item xs={12} sm={7} >
+                                <Posts setCurrentId={setCurrentId}/>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </Grow>
+        </Container>
+       
+        
+    );
 }
 
-export default App;
+ export default App;
+ 
