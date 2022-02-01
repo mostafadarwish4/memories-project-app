@@ -6,7 +6,7 @@ https://m4-memories-blog.netlify.app/
 
 In the project directory, you can run:
 
-##npm install 
+### `npm install`
 
 download app dependencies
 
